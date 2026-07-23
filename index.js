@@ -1,3 +1,5 @@
+
+
 import dns from "node:dns";
 
 dns.setDefaultResultOrder("ipv4first");
@@ -12,7 +14,25 @@ import cityRouter from "./src/routes/city.routes.js";
 import empRouter from "./src/routes/employee.routes.js";
 import errorHandler from "./src/middleware/errorHandler.js";
 import { rateLimit } from "express-rate-limit";
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://employeemanagementsystem-sooty.vercel.app",
+];
 
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
 const app = express();
 const rateLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes window
@@ -25,12 +45,8 @@ const rateLimiter = rateLimit({
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: "https://employeemanagementsystem-sooty.vercel.app",
-    credentials: true,
-  }),
-);
+
+
 app.get("/", (req, res) => {
   res.json("msg:Ritika");
 });
