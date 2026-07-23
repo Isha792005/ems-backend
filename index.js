@@ -26,6 +26,9 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cors());
+app.get("/", (req, res) => {
+  res.json("msg:Ritika");
+});
 app.use("/api/auth", authRoutes);
 app.use("/api/department", depRouter);
 app.use("/api/state", stateRouter);
