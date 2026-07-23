@@ -25,7 +25,12 @@ const rateLimiter = rateLimit({
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://your-frontend-url.vercel.app",
+    credentials: true,
+  }),
+);
 app.get("/", (req, res) => {
   res.json("msg:Ritika");
 });
