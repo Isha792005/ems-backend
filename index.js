@@ -14,6 +14,7 @@ import cityRouter from "./src/routes/city.routes.js";
 import empRouter from "./src/routes/employee.routes.js";
 import errorHandler from "./src/middleware/errorHandler.js";
 import { rateLimit } from "express-rate-limit";
+const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
   "https://employeemanagementsystem-sooty.vercel.app",
@@ -33,7 +34,7 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
-const app = express();
+
 const rateLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes window
   limit: 100, // Limit each IP to 100 requests per window
