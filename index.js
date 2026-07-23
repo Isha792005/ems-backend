@@ -27,7 +27,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://your-frontend-url.vercel.app",
+    origin: "https://employeemanagementsystem-sooty.vercel.app/",
     credentials: true,
   }),
 );
