@@ -2,20 +2,49 @@ import Employee from "../models/Employee.js"
 
 export const addEmployee = async (req, res) => {
   try {
-    const { name, email, phone, gender, department, state, city, pincode, address, isPermanent } = req.body;
+    const {
+      name,
+      email,
+      phone,
+      gender,
+      department,
+      state,
+      city,
+      pincode,
+      address,
+      isPermanent,
+    } = req.body;
     const profilePicture = req.file ? req.file.path : " ";
-    const employee = await Employee.create({profilePicture,name,email,phone,gender,department,state,city,pincode,address,isPermanent,
+    const employee = await Employee.create({
+      profilePicture,
+      name,
+      email,
+      phone,
+      gender,
+      department,
+      state,
+      city,
+      pincode,
+      address,
+      isPermanent,
     });
 
     if (!employee) {
-      return res.status(400).json("Employee not created")
+      return res.status(400).json("Employee not created");
     }
 
-    return res.status(201).json({ msg: "Employee created successfully" , employee});
+    return res
+      .status(201)
+      .json({ msg: "Employee created successfully", employee });
   } catch (error) {
-    return res.status(500).json("Interal server error")
-    
+    console.log("ADD EMPLOYEE ERROR:", error);
+
+    return res.status(500).json({
+      message: "Internal server error",
+      error: error.message,
+    });
   }
+
 }
 
 export const getEmployee = async (req, res) => {
