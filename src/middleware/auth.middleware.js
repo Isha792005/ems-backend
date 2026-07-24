@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken"
 
 export const authMiddleware = (req, res, next) => {
 try {
-    const Authheader = req.headres.authorization
+    const Authheader = req.headers.authorization
     if (!Authheader) {
         return res.status(400).json("Header missing")
     }
