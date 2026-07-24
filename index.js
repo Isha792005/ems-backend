@@ -17,7 +17,7 @@ import { rateLimit } from "express-rate-limit";
 const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://employeemanagementsystem-sooty.vercel.app",
+  "https://emloyeemanagementsystem.vercel.app",
 ];
 
 app.use(
